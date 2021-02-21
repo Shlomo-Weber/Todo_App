@@ -5,7 +5,3 @@ ul {
     list-style-type: none;
 };
 
-#check:checked + label {
-    color:blue;
-    text-decoration: line-through;
-}

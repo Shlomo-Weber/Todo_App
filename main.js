@@ -21,33 +21,33 @@ let todos = []
 // }
 
 
-// const subBtn = document.getElementById('addTodo').addEventListener('submit', (e) =>{
-// e.preventDefault()
-// let ul = document.querySelector('#todoList')
-// let li = document.createElement('li')
-// let tdInput = document.querySelector('#txtBox').value
-// if (tdInput !=='') {
-//     todos.push({
-//         id: todos.length,
-//         tdInput
-//     })
-//     todos.forEach(todo =>{
-//     li.innerHTML = `
-//     <style #check:checked + label {
-//         color:blue;
-//         text-decoration: line-through;
-//     }></style>
-//     <input type="checkbox" id="check"><label for="check">${todo.tdInput}</label>
-//     <button id="delete">Delete</button>`
-//     ul.appendChild(li)
+const renderTodos = (todos)=>{
+    const ul = document.getElementById('todoList')
+    const tdDiv = document.createElement('div')
+    let li = document.createElement('li')
+    const check = document.createElement('input')
+    check.setAttribute('type', 'checkbox')
+    check.addEventListener('change', ()=>{
+        console.log(this)
+    })
+    const tdText = document.createElement('span')
+    const dltButton = document.createElement('button')
+    dltButton.innerText="Delete"
+    dltButton.addEventListener('click',()=>{
+        
+    })
+
     
-//     saveTodos()
-//     })
-// } else{
-//     alert('You need to add something')
-// }
-// document.querySelector('#txtBox').value = ''
-// })
+    todos.forEach(todo=>{
+        tdText.innerHTML =`${todo.text}`
+
+        tdDiv.appendChild(check)
+        tdDiv.appendChild(tdText)
+        tdDiv.appendChild(dltButton)
+    })
+    li.appendChild(tdDiv)
+    ul.appendChild(li)
+} 
 
 
 document.getElementById('addTodo').addEventListener('click', ()=>{
@@ -60,32 +60,7 @@ document.getElementById('addTodo').addEventListener('click', ()=>{
     } else {
         alert('Please input task')
     }
-
-    if (todos.length > 0){
-        const ul = document.getElementById('todoList')
-        let li = document.createElement('li')
-        const check = document.createElement('input')
-        check.type ="checkbox"
-        const dltButton = document.createElement('button')
-        dltButton.innerText="Delete"
-
-    
-        todos.forEach(todo=>{
-            let tdText = document.createElement('span')
-            tdText.innerHTML =`${todo.text}`
-
-            li.appendChild(check)
-            li.appendChild(tdText)
-            li.appendChild(dltButton)
-            console.log(todo.text)
-        })
-        
-        ul.appendChild(li)
-    }
-    console.log(todos)
     document.getElementById('txtBox').value = ''
+    console.log(todos)
+    renderTodos(todos)
 })
-
-
-
-// getSavedTodos();
