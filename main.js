@@ -4,7 +4,7 @@ function c(stuff) {
 
 c('herp derp')
 
-let todos = []
+let Todos = []
 
 // const getSavedTodos = ()=>{
 //     const todosJSON = localStorage.getItem('todos')
@@ -21,46 +21,75 @@ let todos = []
 // }
 
 
-const renderTodos = (todos)=>{
+
+const renderTodos = (Todos)=>{
+    document.getElementById('todoList').innerHTML=''
     const ul = document.getElementById('todoList')
-    const tdDiv = document.createElement('div')
     let li = document.createElement('li')
-    const check = document.createElement('input')
+    // creates list item
+    let check = document.createElement('input')
     check.setAttribute('type', 'checkbox')
-    check.addEventListener('change', ()=>{
-        console.log(this)
-    })
+    // check.addEventListener('change', completeTodo)
     const tdText = document.createElement('span')
     const dltButton = document.createElement('button')
     dltButton.innerText="Delete"
-    dltButton.addEventListener('click',()=>{
-        
-    })
+    dltButton.addEventListener('click', deleteTodo)
 
-    
-    todos.forEach(todo=>{
+    //creates checkbox, span with text, and delete button with functions
+ 
+    Todos.forEach(todo=>{
         tdText.innerHTML =`${todo.text}`
-
-        tdDiv.appendChild(check)
-        tdDiv.appendChild(tdText)
-        tdDiv.appendChild(dltButton)
+        li.appendChild(check)
+        li.appendChild(tdText)
+        li.appendChild(dltButton)
     })
-    li.appendChild(tdDiv)
+    //loops through todos and creates list item for each
+
     ul.appendChild(li)
+    console.log(Todos)
 } 
 
 
-document.getElementById('addTodo').addEventListener('click', ()=>{
+const createTodo = ()=>{
     let text = document.getElementById('txtBox').value
+    //grabs the text value of the input box
     if (text !== ''){
-        todos.push({
-            id: todos.length,
-            text
+        Todos.push({
+            id: Date.now(),
+            text,
+            checked: false
         })
+    // adds it to the todos array if there is text
     } else {
         alert('Please input task')
-    }
+    } //if no text, asks to reclarify
     document.getElementById('txtBox').value = ''
-    console.log(todos)
-    renderTodos(todos)
-})
+    // empties the textbox
+    renderTodos(Todos)
+}
+
+document.getElementById('addTodo').addEventListener('click', createTodo)
+
+
+// const completeTodo = (todoID)=>{
+//     const newTodos = Todos.filter((todo)=>{
+//         if (todo.id ===todoID){
+//             todo.checked = true
+//         }
+//     })
+//     Todos = newTodos
+//     renderTodos(Todos)
+// }
+
+
+const deleteTodo = (todoID)=>{
+    const newTodos = Todos.filter((todo) =>{
+        if (todo.id !==todoID){
+            return false
+        } else {
+            return true
+        }
+    })
+    Todos = newTodos
+    renderTodos(Todos)
+}

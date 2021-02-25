@@ -1,6 +1,15 @@
 body {
     text-align: center;
 }
+
+h1, h3 {
+    font-family: 'Indie Flower', cursive;
+}
+
+#txtBox {
+    padding-top:12.5px ;
+}
+
 ul {
     list-style-type: none;
 };
